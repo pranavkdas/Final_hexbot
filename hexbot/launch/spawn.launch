@@ -1,0 +1,12 @@
+<launch>
+
+    <param name="robot_description" textfile="$(find hexbot)/urdf/test.urdf" />
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -param robot_description -model robot -x 0 -y 0 -z 0" />
+    <rosparam file="$(find hexbot)/config/config.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/hexbot" args="joint_base_top_controller joint_state_controller --shutdown-timeout 3"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="/joint_states" to="/hexbot/joint_states" />
+    </node>
+
+</launch>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<launch>
+    <node name="reading_laser" pkg="hexbot" type="left.py" output="screen"></node>
+    <node name="going_forward" pkg="hexbot" type="front.py" output="screen"></node>
+</launch>

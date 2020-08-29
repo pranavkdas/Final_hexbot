@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<launch>
+    
+        <!-- overwriting these args -->
+        <arg name="debug" default="false" />
+        <arg name="gui" default="true" />        <!-- to be kept true if we require the graphical interface -->
+        <arg name="pause" default="false" />            <!-- if true, the simulation starts in paused state. you have to play it to see the gravity and other movements -->
+ <arg name="world" default="$(find hexbot)/world/final.world" /> 
+   <!--<arg name="world" default="$(find hexbot)/world/world_demo_presentation.world" /> -->
+
+        <!-- include gazebo_ros launcher -->
+        <include file="$(find gazebo_ros)/launch/empty_world.launch">
+                <arg name="world_name" value="$(arg world)" />
+                <arg name="debug" value="$(arg debug)" />
+                <arg name="gui" value="$(arg gui)" />
+                <arg name="paused" value="$(arg pause)" />
+                <arg name="use_sim_time" value="true" />             <!-- export GAZEBO_MODEL_PATH=~/simulation_ws/src/my_simulations/models:${GAZEBO_MODEL_PATH} -->
+        </include> -->
+
+     <param name="robot_description" command="$(find xacro)/xacro '$(find hexbot)/urdf/bot_urdf.xacro'"/>
+         <arg name="x" default="0"/>
+        <arg name="y" default="0"/>
+        <arg name="z" default="0"/>
+        <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model hexbot -x $(arg x) -y $(arg y) -z $(arg z)"/> 
+
+</launch>

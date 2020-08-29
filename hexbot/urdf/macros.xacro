@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="hexbot" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:macro name="wheel" params="name xj yj zj">
+		<!-- we can call this macro as link_wheel and specify the name and other properties from the bot_urdf.xacro file -->
+		<link name="${name}">
+			<!-- this can be either the link_left_wheel or link_right_wheel to denote the exact same thing written bot_urdf.xacro file -->
+			<inertial>
+				<mass value="0.2"/>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<inertia ixx="0.000526666666667" ixy="0" ixz="0" iyy="0.000526666666667" iyz="0" izz="0.001"/>
+			</inertial>
+			<collision name="${name}_collision">
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<!-- wheel should be rotated around the axis-->
+				<geometry>
+					<mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1"/>
+					<!--<cylinder length="0.04" radius="0.05"/>-->
+				</geometry>
+			</collision>
+			<visual name="${name}_visual">
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1"/>
+					<!--<cylinder length="0.04" radius="0.05"/>-->
+				</geometry>
+			</visual>
+		</link>
+		<joint name="${name}_joint" type="continuous">
+			<origin rpy="0 0 0" xyz="${xj} ${yj} ${zj}"/>
+			<parent link="link_chassis"/>
+			<child link="${name}"/>
+			<axis xyz="0 0.05 0"/>
+	
+		</joint>
+	<!--	<transmission name="${name}_trans">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_joint">
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="motor_${name}">
+				<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission> -->
+	</xacro:macro> 
+
+</robot>

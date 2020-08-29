@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.5">
+	<world name="default">
+		<!-- A global light source -->
+		<include>
+			<uri>model://sun</uri>
+		</include>
+
+		<!-- A ground plane -->
+		<include>
+			<uri>model://ground_plane</uri>
+		</include>
+
+		<!-- A post box plane -->
+		<include>                   <!--This adds a model called postbox in the initial position (x=0, y=0, z=0). If you want it in a different position, you can add a <pose> -->
+			<uri>model://Untitled</uri>                                     <!--https://github.com/osrf/gazebo_models -->
+			<static>true</static>       <!-- so that when the simulation plays, it remains static that is it wont be affected by gravity -->
+			<pose>0 0 0 0 0 0 </pose>         <!-- define the initial pose. by default 0 0 0 0 0 0 -->     
+		</include>   
+
+	</world>
+</sdf>

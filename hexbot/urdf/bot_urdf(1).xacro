@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+
+<!-- Link to the tutorial:  https://www.theconstructsim.com/exploring-ros-2-wheeled-robot-part-01/ -->
+
+<robot name="hexbot" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:include filename="$(find hexbot)/urdf/materials.xacro" />
+  <xacro:include filename="$(find hexbot)/urdf/hex.gazebo" />
+  <xacro:include filename="$(find hexbot)/urdf/macros.xacro" /> 
+  
+
+
+
+  <link name="link_chassis">
+    <!-- pose and inertial -->
+    <pose>0 0 0 0 0 0</pose> <!-- Our bot will be 0.1m from the ground-->
+    <inertial>
+      <mass value="5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <!-- body -->
+    <collision name="collision_chassis">     <!-- Collision property used by the simulator to calculate the self collisions etc-->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/bot_body_new.dae" scale="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+    <visual>               <!-- Used to create the visualisation of the robot in the simulator -->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/bot_body_new.dae" scale="0.01 0.01 0.01" />
+      </geometry>
+      <material name="blue"/>            <!--Defines the color and other properties -->
+    </visual>
+    
+  </link>
+
+
+  <link name="frontwheel_left">
+    <collision name="collision1">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+         <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </collision>
+    <visual name="frontwheel_left_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5"/>
+      <inertia
+        ixx=".1" ixy="0.0" ixz="0.0"
+        iyy=".1" iyz="0.0"
+        izz=".1"/>
+    </inertial>
+  </link>
+
+  <joint name="fwl_tolink" type="continuous">
+    <origin xyz="0.08 0.15 -0.1" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="frontwheel_left"/>
+    <axis xyz="0 0.05 0" />
+  </joint>
+
+  <transmission name="fwl_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+    <joint name="fwl_tolink">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_rear_left_wheel">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    </transmission>
+
+  <link name="frontwheel_right">
+    <collision name="collision2">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </collision>
+    <visual name="frontwheel_right_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5"/>
+      <inertia
+        ixx=".1" ixy="0.0" ixz="0.0"
+        iyy=".1" iyz="0.0"
+        izz=".1"/>
+    </inertial>
+  </link>
+
+  <joint name="fwr_tolink" type="continuous">
+    <origin xyz="0.08 -0.15 -0.1" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="frontwheel_right"/>
+   <axis xyz="0 0.05 0" />
+  </joint>
+    <transmission name="fwr_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+    <joint name="fwr_tolink">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_rear_left_wheel">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    </transmission>
+
+  <link name="backwheel_left">
+    <collision name="collision3">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </collision>
+    <visual name="backwheel_left_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5"/>
+      <inertia
+        ixx=".1" ixy="0.0" ixz="0.0"
+        iyy=".1" iyz="0.0"
+        izz=".1"/>
+    </inertial>
+  </link>
+
+  <joint name="bwl_tolink" type="continuous">
+    <origin xyz="-0.08 0.15 -0.1" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="backwheel_left"/>
+    <axis xyz="0 0.05 0" />
+  </joint>
+
+  <transmission name="bwl_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+    <joint name="bwl_tolink">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_rear_left_wheel">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    </transmission>
+
+  <link name="backwheel_right">
+    <collision name="collision4">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </collision>
+    <visual name="backwheel_right_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/wheel.dae" scale="0.1 0.1 0.1" />
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5"/>
+      <inertia
+        ixx=".1" ixy="0.0" ixz="0.0"
+        iyy=".1" iyz="0.0"
+        izz=".1"/>
+    </inertial>
+  </link>
+
+  <joint name="bwr_tolink" type="continuous">
+    <origin xyz="-0.08 -0.15 -0.1" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="backwheel_right"/>
+    <axis xyz="0 0.05 0" />
+  </joint>
+
+  <transmission name="bwr_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+    <joint name="bwr_tolink">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_rear_left_wheel">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    </transmission>
+
+
+
+
+  <link name="sensor_laser">                   <!-- laser sensor dimensions and collisions --> <!--gazebo plugin added in hex.gazebo file -->
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia ixx="0.0010417" iyy="0.00028333" izz="0.0009083" ixy="0" iyz="0" ixz="0"  />     <!--inertia loaded from macros file -->
+    </inertial>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+        <box size="0.03 0.1 0.05" />
+        </geometry>
+        <material name="white" />
+    </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.03 0.1 0.05" />
+        </geometry>
+    </collision>
+    </link>
+
+    <joint name="joint_sensor_laser" type="fixed">        <!-- laser sensor attachment -->
+    <origin xyz="0.14 0 0" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="sensor_laser"/>
+  </joint>
+
+    <link name="camera_sensor">                   <!--camera sensor dimensions and collisions --> <!--gazebo plugin added in hex.gazebo file -->
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia ixx="0.0010417" iyy="0.00028333" izz="0.0009083" ixy="0" iyz="0" ixz="0"  />     <!--inertia loaded from macros file -->
+    </inertial>
+
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+        <box size="0.03 0.1 0.05" />
+        </geometry>
+        <material name="white" />
+    </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.03 0.1 0.05" />
+        </geometry>
+    </collision>
+    </link>
+
+    <joint name="joint_camera_sensor" type="fixed">        <!-- laser sensor attachment -->
+    <origin xyz="0.14 0 0.1" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="camera_sensor"/>
+  </joint>
+
+</robot>

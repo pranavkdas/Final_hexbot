@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+
+<robot name="stands" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- body of the bot -->
+  <link name="stand1">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+
+    </visual>
+  </link>
+
+  <link name="red_name">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="0.2"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/red.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/red.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+    <joint name="stand1joint" type="fixed">
+    <origin xyz="0.05 -0.035 0.05" rpy="1.5707 0 1.5707" />
+    <parent link="stand1"/>
+    <child link="red_name" />
+  </joint>
+
+    <!-- body of the bot -->
+  <link name="stand2">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+
+    </visual>
+  </link>
+
+      <joint name="stand1tostand2" type="fixed">
+    <origin xyz="0 1 0" rpy="0 0 0" />
+    <parent link="stand1"/>
+    <child link="stand2" />
+  </joint>
+
+  <link name="red_name_2">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/yellow.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/yellow.stl" scale="0.6  0.6 0.6"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+    <joint name="stand2joint" type="fixed">
+    <origin xyz="0.05 -0.04 0.05" rpy="1.5707 0 1.5707" />
+    <parent link="stand2"/>
+    <child link="red_name_2" />
+  </joint>
+
+      <!-- body of the bot -->
+  <link name="stand3">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+
+    </visual>
+  </link>
+
+      <joint name="stand2tostand3" type="fixed">
+    <origin xyz="0 1 0" rpy="0 0 0" />
+    <parent link="stand2"/>
+    <child link="stand3" />
+  </joint>
+
+  <link name="red_name_3">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/navy blue.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/navy blue.stl" scale="0.45 0.45 0.45"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+    <joint name="stand3joint" type="fixed">
+    <origin xyz="0.05 -0.045 0.05" rpy="1.5707 0 1.5707" />
+    <parent link="stand3"/>
+    <child link="red_name_3" />
+  </joint>
+
+        <!-- body of the bot -->
+  <link name="stand4">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/base.stl" scale="1 1 1"/>
+      </geometry>
+
+    </visual>
+  </link>
+
+      <joint name="stand3tostand4" type="fixed">
+    <origin xyz="0 1 0" rpy="0 0 0" />
+    <parent link="stand3"/>
+    <child link="stand4" />
+  </joint>
+
+  <link name="red_name_4">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/green.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/shapes/green.stl" scale="0.6 0.6 0.6"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+    <joint name="stand4joint" type="fixed">
+    <origin xyz="0.05 -0.04 0.05" rpy="1.5707 0 1.5707" />
+    <parent link="stand4"/>
+    <child link="red_name_4" />
+  </joint>
+  
+    <gazebo reference="red_name">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="red_name_2">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="red_name_3">
+    <material>Gazebo/Black</material>
+  </gazebo>
+    <gazebo reference="red_name_4">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="stand1">
+   <turnGravityOff>true</turnGravityOff>
+   <material>
+          <lighting>1</lighting>
+          <ambient>0.4 0.2 0 1</ambient>
+            <diffuse>0.4 0.2 0 1</diffuse>
+            <specular>0.4 0.2 0 1</specular>
+            <emissive>0.4 0.2 0 1</emissive>
+        </material>
+</gazebo>
+<gazebo reference="stand2">
+   <turnGravityOff>true</turnGravityOff>
+   <material>
+          <lighting>1</lighting>
+          <ambient>0.4 0.2 0 1</ambient>
+            <diffuse>0.4 0.2 0 1</diffuse>
+            <specular>0.4 0.2 0 1</specular>
+            <emissive>0.4 0.2 0 1</emissive>
+        </material>
+</gazebo>
+<gazebo reference="stand3">
+   <turnGravityOff>true</turnGravityOff>
+   <material>
+          <lighting>1</lighting>
+          <ambient>0.4 0.2 0 1</ambient>
+            <diffuse>0.4 0.2 0 1</diffuse>
+            <specular>0.4 0.2 0 1</specular>
+            <emissive>0.4 0.2 0 1</emissive>
+        </material>
+</gazebo>
+<gazebo reference="stand4">
+   <turnGravityOff>true</turnGravityOff>
+   <material>
+          <lighting>1</lighting>
+          <ambient>0.4 0.2 0 1</ambient>
+            <diffuse>0.4 0.2 0 1</diffuse>
+            <specular>0.4 0.2 0 1</specular>
+            <emissive>0.4 0.2 0 1</emissive>
+        </material>
+</gazebo>
+<gazebo reference="red_name_4">
+   <turnGravityOff>true</turnGravityOff>
+</gazebo>
+<gazebo reference="red_name_2">
+   <turnGravityOff>true</turnGravityOff>
+</gazebo>
+<gazebo reference="red_name_3">
+   <turnGravityOff>true</turnGravityOff>
+</gazebo>
+<gazebo reference="red_name_4">
+   <turnGravityOff>true</turnGravityOff>
+</gazebo>
+  <gazebo>
+    <static>true</static>
+</gazebo>
+</robot>

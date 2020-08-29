@@ -1,0 +1,19 @@
+<launch>
+
+  <!-- the parameter with name robot_description will load the urdf file. (here the urdf is not using any xacro macros and we can read the file using the cat command) -->	
+  <!-- <param name="robot_description" command="cat '$(find hexbot)/urdf/bot_urdf.xacro'"/> -->
+  <!-- if urdf was using macros, we need to convert it to urdf and the additional command should be added before loading it up -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find hexbot)/urdf/bases.xacro'"/>
+
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
+    <param name="use_gui" value="True"/>
+  </node>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Show in Rviz   -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hexbot)/rviz/hexbot.rviz" />
+
+</launch>

@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+
+<robot name="hexbot" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:include filename="$(find hexbot)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find hexbot)/urdf/hex.gazebo"/>
+  <xacro:include filename="$(find hexbot)/urdf/macros.xacro"/>
+  <xacro:include filename="$(find hexbot)/urdf/armmove.xacro"/>
+  
+
+
+  <link name="base_footprint">
+   <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0.0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="link_chassis" />
+  </joint>
+
+
+
+  <!-- body of the bot -->
+  <link name="link_chassis">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="5"/>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/bot_body_new.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/bot_body_new.dae" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="box_shelf">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="2"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
+    </inertial>
+    <collision name="collision_chassis">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/shell.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://hexbot/meshes/shell.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+    <joint name="box_shelf_joint" type="fixed">
+    <origin xyz="-0.06 0 0.1" rpy="0 0 0" />
+    <parent link="link_chassis"/>
+    <child link="box_shelf" />
+  </joint>
+  
+  <link name="stand_1">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="stand_1_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.085 -0.085 0.172"/>
+    <parent link="link_chassis"/>
+    <child link="stand_1"/>
+  </joint>
+
+  <link name="stand_2">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="stand_2_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.085 -0.085 0.172"/>
+    <parent link="link_chassis"/>
+    <child link="stand_2"/>
+  </joint>
+
+  <link name="stand_3">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="stand_3_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.085 0.085 0.172"/>
+    <parent link="link_chassis"/>
+    <child link="stand_3"/>
+  </joint>
+  <!-- wheels of the bot with link, joint and transmission -->
+  <xacro:wheel name="fwl" xj="0.08" yj="0.15" zj="0" />  
+  <xacro:wheel name="fwr" xj="0.08" yj="-0.15" zj="0" />  
+  <xacro:wheel name="bwl" xj="-0.08" yj="0.15" zj="0" />  
+  <xacro:wheel name="bwr" xj="-0.08" yj="-0.15" zj="0" /> 
+  
+    <joint name="arm_base_to_chassis" type="fixed">
+    <origin xyz="0.0850 0.09 0.15" rpy="0 0 0" />
+    <parent link="link_chassis"/>
+    <child link="base_arm" />
+  </joint>
+
+  <!-- laser_sensor -->
+  <link name="sensor_laser">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.06 0.03"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.06 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint_sensor_laser" type="fixed">
+    <origin rpy="0 0 0" xyz="0.13 0.09 0.025"/>
+    <parent link="link_chassis"/>
+    <child link="sensor_laser"/>
+  </joint>
+<!--  <link name="sensor_laser_left">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.06 0.03"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.06 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_sensor_joint" type="fixed">
+    <origin rpy="0 0 1.5707" xyz="0 0.15 0.12"/>
+    <parent link="link_chassis"/>
+    <child link="sensor_laser_left"/>
+  </joint> -->
+
+  <!-- camera -->
+  <link name="camera_sensor">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1"/>
+      <inertia ixx="0.0010417" ixy="0" ixz="0" iyy="0.00028333" iyz="0" izz="0.0009083"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.03 0.03"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.06 0.03"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint_camera_sensor" type="fixed">
+    <origin rpy="0 0 0" xyz="0.15 0.09 0.13"/>
+    <parent link="link_chassis"/>
+    <child link="camera_sensor"/>
+  </joint>
+
+</robot>
